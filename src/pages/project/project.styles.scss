@@ -1,0 +1,38 @@
+.project__page {
+   background: rgba(240, 244, 248, 0.425);
+   .project__nav {
+      padding: 10px 20px 0 20px;
+      background-color: white;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      z-index: 100;
+
+      .links__section {
+         display: flex;
+         gap: 20px;
+         .link {
+            position: relative;
+            transition: all 0.2s;
+            padding: 4px 0;
+            &::after {
+               position: absolute;
+               content: "";
+               height: 2px;
+               width: 100%;
+               left: 0;
+               bottom: 0;
+               background-color: rgb(42, 139, 143);
+               opacity: 0;
+               transition: all 0.2s;
+            }
+
+            &.active,
+            &:hover {
+               color: rgb(42, 139, 143);
+               &::after {
+                  opacity: 1;
+               }
+            }
+         }
+      }
+   }
+}

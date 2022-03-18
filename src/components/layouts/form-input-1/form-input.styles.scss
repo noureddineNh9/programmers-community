@@ -1,0 +1,79 @@
+$sub-color: rgb(36, 36, 36);
+$main-color: black;
+
+@mixin shrinkLabel {
+   top: -14px;
+   font-size: 12px;
+   color: $main-color;
+}
+
+.group {
+   position: relative;
+   margin-top: 30px;
+
+   .form-input {
+      outline: none;
+   }
+
+   .form-input[type="password"],
+   .form-input[type="text"],
+   .form-input[type="email"] {
+      background: none;
+      background-color: white;
+      color: $sub-color;
+      font-size: 18px;
+      padding: 7px 7px 7px 5px;
+      display: block;
+      width: 100%;
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid $sub-color;
+
+      &:focus {
+      }
+
+      &:focus ~ .form-input-label {
+         @include shrinkLabel();
+      }
+   }
+   .form-input[type="button"],
+   .form-input[type="submit"] {
+      background: none;
+      background-color: rgb(0, 0, 0);
+      color: white;
+      font-size: 18px;
+      padding: 10px 30px;
+      display: block;
+      border-radius: 0;
+      border: 1px solid $sub-color;
+      margin-bottom: 25px 0;
+
+      cursor: pointer;
+
+      transition: all 0.25s;
+
+      &:hover {
+         background-color: white;
+         color: black;
+      }
+   }
+
+   input[type="password"] {
+      letter-spacing: 0.3em;
+   }
+
+   .form-input-label {
+      color: rgb(172, 172, 172);
+      font-size: 16px;
+      font-weight: normal;
+      position: absolute;
+      pointer-events: none;
+      left: 5px;
+      top: 10px;
+      transition: 300ms ease all;
+
+      &.shrink {
+         @include shrinkLabel();
+      }
+   }
+}
