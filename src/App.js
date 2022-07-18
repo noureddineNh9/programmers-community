@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
@@ -18,8 +18,32 @@ import AllProjects from "./pages/all-projects/all-projects.component";
 import NotFound from "./pages/not-found/not-found.component";
 import Signin from "./pages/signin/signin.component";
 import Signup from "./pages/signup/signup.component";
+import { useRouteMatch } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+function ProgrammerArea() {
+   let { path } = useRouteMatch();
+
+   return (
+      <>
+         <Sidebar />
+         <div className="content">
+            <Switch>
+               <Route exact path="/">
+                  <h3>home</h3>
+               </Route>
+               <Route exact path={`/project`} component={AllProjects} />
+               <Route path={`/project/:projectId`} component={ProjectPage} />
+               <Route path="*" component={NotFound} />
+            </Switch>
+         </div>
+      </>
+   );
+}
 
 function App(props) {
+   const [isLoading, setIsLoading] = useState(true);
+
    useEffect(() => {
       // * load user from local storage
       const userFromLocalStorage = JSON.parse(
@@ -28,6 +52,8 @@ function App(props) {
       if (userFromLocalStorage) {
          props.setCurrentUser(userFromLocalStorage);
       }
+
+      setIsLoading(false);
       // ******************************
    }, []);
 
@@ -119,6 +145,23 @@ function App(props) {
 
    return (
       <div className="App">
+         <Switch>
+            {props.currentUser ? (
+               <Route path="/" component={ProgrammerArea} />
+            ) : (
+               <Route exact path="/" component={HomePage} />
+            )}
+
+            <Route path="/signin" component={Signin} />
+            <Route path="/signup" component={Signup} />
+            <Route path="*" component={NotFound} />
+         </Switch>
+      </div>
+   );
+
+   /*
+   return (
+      <div className="App">
          {props.currentUser ? (
             <>
                <Sidebar />
@@ -142,6 +185,7 @@ function App(props) {
          )}
       </div>
    );
+   */
 }
 
 const mapStateToProps = ({ user }) => ({

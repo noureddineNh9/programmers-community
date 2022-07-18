@@ -16,14 +16,14 @@ function AddTaskButton({ projectId, addTaskToRedux }) {
       id_projet: projectId,
    });
    const [FormError, setFormError] = useState("");
+
    const handleSubmit = async (e) => {
       e.preventDefault();
 
       try {
          const res = await axios.post(BASE_URL + "tache", FormValue);
-         console.log(res.data);
-         addTaskToRedux(FormValue);
-         setModalActive(false);
+         addTaskToRedux(res.data);
+         closeModal();
       } catch (err) {
          if (err.response.data) {
             setFormError(err.response.data);

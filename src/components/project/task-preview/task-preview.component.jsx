@@ -19,11 +19,13 @@ function Task({
             <div className="flex">
                {sousTaches.map((item, index) => (
                   <span key={index} href="#" className="">
-                     <img
-                        className="h-8 w-8 rounded-full border "
-                        src={item.assignee.image_profile}
-                        alt=""
-                     />
+                     {item.assignee && (
+                        <img
+                           className="h-8 w-8 rounded-full border "
+                           src={item.assignee.image_profile}
+                           alt=""
+                        />
+                     )}
                   </span>
                ))}
             </div>

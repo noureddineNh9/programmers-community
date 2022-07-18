@@ -11,3 +11,8 @@ export const addTask = (task) => ({
    type: "ADD_TASK",
    payload: task,
 });
+
+export const addSubTask = (subtask) => ({
+   type: "ADD_SUBTASK",
+   payload: subtask,
+});

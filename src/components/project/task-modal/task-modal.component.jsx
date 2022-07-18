@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import AddSubtaskButton from "../add-subtask-button/add-subtask-button.component";
 import "./task-modal.styles.scss";
 
 function TaskModal({ tache, closeModal, ...othersProps }) {
@@ -44,6 +45,7 @@ function TaskModal({ tache, closeModal, ...othersProps }) {
                         </h4>
                         <p>{tache.creer_on}</p>
                      </div>
+
                      <div className="px-4 bg-slate-100">
                         <span
                            onClick={() => setSubtasksRoute("subtasks")}
@@ -62,11 +64,12 @@ function TaskModal({ tache, closeModal, ...othersProps }) {
                            <i className="far fa-comments"></i> comments
                         </span>
                      </div>
-                     <div className="p-8">
+
+                     <div>
                         {subtasksRoute === "subtasks" ? (
                            <>
                               {tache.sousTaches.length !== 0 ? (
-                                 <div>
+                                 <div className="p-8">
                                     {subtasksProgress !== null && (
                                        <div className="flex flex-wrap justify-between items-center mb-4">
                                           <h5 className="mr-20">
@@ -114,7 +117,6 @@ function TaskModal({ tache, closeModal, ...othersProps }) {
                                              </span>
                                           </div>
                                        ))}
-                                    <h5>Subtasks Completed</h5>
                                     {tache.sousTaches
                                        .filter(
                                           (sousTache) =>
@@ -148,10 +150,16 @@ function TaskModal({ tache, closeModal, ...othersProps }) {
                                        ))}
                                  </div>
                               ) : (
-                                 <div>
-                                    <h5>pas des sous taches</h5>
-                                 </div>
+                                 <div className="p-8">no subtasks</div>
                               )}
+                              <div className="px-8 py-4 bg-slate-100">
+                                 <AddSubtaskButton
+                                    taskId={tache.id}
+                                    className="text-gray-500"
+                                 >
+                                    add subtask
+                                 </AddSubtaskButton>
+                              </div>
                            </>
                         ) : subtasksRoute === "comments" ? (
                            <>

@@ -14,7 +14,7 @@ function Project(props) {
    const [Project, setProject] = useState(null);
 
    useEffect(() => {
-      //props.addProject({ id: 123, title: "p1" });
+      //props.addProject({ id: 123, title: "p1" });*
       if (props.projects) {
          const pathName = props.location.pathname;
          const pathNameArr = pathName.split("/");
@@ -37,7 +37,7 @@ function Project(props) {
 
    return (
       <div className="project__page">
-         {Project != null && (
+         {Project !== null && (
             <>
                <div className="project__nav">
                   <div className="title__section">
